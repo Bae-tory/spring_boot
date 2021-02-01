@@ -3,8 +3,7 @@ package com.example.restful_sample.user;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.sql.Date;
+import java.util.Date;
 
 @Data
 @AllArgsConstructor
