@@ -25,7 +25,15 @@ public class UserController {
     // GET /user/1 or /user/2 -> String이지만 int로 자동 맵핑됨
     @GetMapping("/user/{id}")
     public User getUser(@PathVariable int id) {
-        return userDaoService.findOne(id);
+        User userById = userDaoService.findOne(id);
+        if (userById == null) {
+
+            throw new UserNotFoundException(String.format(("ID[%s] not found"), id));
+
+        } else {
+
+        }
+        return userById;
     }
 
     @PostMapping("/user")
