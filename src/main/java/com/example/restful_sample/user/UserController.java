@@ -1,6 +1,10 @@
 package com.example.restful_sample.user;
 
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 public class UserController {
@@ -10,6 +14,17 @@ public class UserController {
 
     public UserController(UserDaoService userDaoService) {
         this.userDaoService = userDaoService;
+    }
+
+    @GetMapping("/users")
+    public List<User> getAllUsers() {
+        return userDaoService.findAll();
+    }
+
+    // GET /user/1 or /user/2 -> String이지만 int로 자동 맵핑됨
+    @GetMapping("/user/{id}")
+    public User getUser(@PathVariable int id) {
+        return userDaoService.findOne(id);
     }
 
 }
