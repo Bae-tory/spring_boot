@@ -1,5 +1,6 @@
 package com.example.restful_sample.user;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,7 +20,9 @@ public class User {
     @Past
     private Date joinDate;
 
+    @JsonIgnore
     private String password;
+    @JsonIgnore
     private String ssn;
 
 }
