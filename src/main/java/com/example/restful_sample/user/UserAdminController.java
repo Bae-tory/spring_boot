@@ -1,6 +1,10 @@
 package com.example.restful_sample.user;
 
+import com.fasterxml.jackson.databind.ser.FilterProvider;
+import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
+import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -20,22 +24,37 @@ public class UserAdminController {
     }
 
     @GetMapping("/users")
-    public List<User> getAllUsers() {
-        return userDaoService.findAll();
+    public MappingJacksonValue getAllUsers() {
+        List<User> userList = userDaoService.findAll();
+
+        SimpleBeanPropertyFilter filter = SimpleBeanPropertyFilter
+                .filterOutAllExcept("id", "name", "password", "ssn");
+
+        FilterProvider filterProvider = new SimpleFilterProvider().addFilter("UserInfo", filter);
+
+        MappingJacksonValue mappingJacksonValue = new MappingJacksonValue(userList);
+        mappingJacksonValue.setFilters(filterProvider);
+
+        return mappingJacksonValue;
     }
 
     // GET /user/1 or /user/2 -> String이지만 int로 자동 맵핑됨
     @GetMapping("/user/{id}")
-    public User getUser(@PathVariable int id) {
+    public MappingJacksonValue/*filter에 걸리기 위해*/ getUser(@PathVariable int id) {
         User userById = userDaoService.findOne(id);
         if (userById == null) {
-
             throw new UserNotFoundException(String.format(("ID[%s] not found"), id));
-
-        } else {
-
         }
-        return userById;
+
+        SimpleBeanPropertyFilter filter = SimpleBeanPropertyFilter
+                .filterOutAllExcept("id", "name", "password", "ssn");
+
+        FilterProvider filterProvider = new SimpleFilterProvider().addFilter("UserInfo", filter);
+
+        MappingJacksonValue mappingJacksonValue = new MappingJacksonValue(userById);
+        mappingJacksonValue.setFilters(filterProvider);
+
+        return mappingJacksonValue;
     }
 
     @PostMapping("/user")
