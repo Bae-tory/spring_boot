@@ -1,6 +1,7 @@
 package com.example.restful_sample.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,6 +13,7 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonIgnoreProperties(value = "password")
 public class User {
 
     private Integer id;
@@ -20,9 +22,9 @@ public class User {
     @Past
     private Date joinDate;
 
-    @JsonIgnore
+//    @JsonIgnore // 필드단위
     private String password;
-    @JsonIgnore
+//    @JsonIgnore // 필드단위
     private String ssn;
 
 }
