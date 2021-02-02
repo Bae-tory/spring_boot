@@ -13,7 +13,6 @@ import java.util.Date;
 
 @RestController
 @ControllerAdvice // 모든 컨트롤러가 실행될 때 이 bean이 실행되게끔 함
-
 public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptionHandler { // 모든 예외상황을 핸들링 할 수 있는 클래스
 
     @ExceptionHandler(Exception.class) // 이 메서드가 익셉션 핸들러로 쓰이게(일반 에러)
