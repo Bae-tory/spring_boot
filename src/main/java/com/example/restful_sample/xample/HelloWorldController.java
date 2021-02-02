@@ -36,6 +36,6 @@ public class HelloWorldController {
     @GetMapping(path = "/hello-world-internationalized")
     public String helloWorldInternationalized(@RequestHeader(name = "Accept-Language", required = false/*필수 값이 아니므로 false*/) Locale locale) {
 
-        return messageSource.getMessage("", null, locale);
+        return messageSource.getMessage("greeting.message", null, locale);
     }
 }
