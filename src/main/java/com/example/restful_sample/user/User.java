@@ -14,7 +14,7 @@ import java.util.Date;
 public class User {
 
     private Integer id;
-    @Size(min = 2)
+    @Size(min = 2, message = "이름은 2자 이상이어야 합니다.")
     private String name;
     @Past
     private Date joinDate;
