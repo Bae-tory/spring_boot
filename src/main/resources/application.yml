@@ -4,3 +4,8 @@ server:
   loggin:
     level:
       org.springframework: debug
+
+
+spring:
+  messages:
+    basename: messages
