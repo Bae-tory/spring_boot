@@ -1,5 +1,7 @@
 package com.example.restful_sample.user;
 
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -23,18 +25,37 @@ public class UserController {
         return userDaoService.findAll();
     }
 
-    // GET /user/1 or /user/2 -> String이지만 int로 자동 맵핑됨
+//    // GET /user/1 or /user/2 -> String이지만 int로 자동 맵핑됨
+//    @GetMapping("/user/{id}")
+//    public User getUser(@PathVariable int id) {
+//        User userById = userDaoService.findOne(id);
+//        if (userById == null) {
+//
+//            throw new UserNotFoundException(String.format(("ID[%s] not found"), id));
+//
+//        }
+//
+//        return userById;
+//    }
+
     @GetMapping("/user/{id}")
-    public User getUser(@PathVariable int id) {
-        User userById = userDaoService.findOne(id);
-        if (userById == null) {
+    public ResponseEntity<EntityModel<User>> getUser(@PathVariable int id) {
+        User user = userDaoService.findOne(id);
 
-            throw new UserNotFoundException(String.format(("ID[%s] not found"), id));
-
-        } else {
-
+        if (user == null) {
+            throw new UserNotFoundException(String.format("ID[%s] not found", id));
         }
-        return userById;
+
+        //Hateoas
+        EntityModel<User> entityModel = EntityModel.of(user);
+
+        //WebMvcLinkBuilder
+        WebMvcLinkBuilder linkTo =
+                WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(this.getClass()).getAllUsers());
+
+        entityModel.add(linkTo.withRel("all-users"));
+
+        return ResponseEntity.ok().body(entityModel);
     }
 
     @PostMapping("/user")
