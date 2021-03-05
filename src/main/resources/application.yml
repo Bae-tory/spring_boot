@@ -5,7 +5,6 @@ server:
     level:
       org.springframework: debug
 
-
 spring:
   messages:
     basename: messages
@@ -13,7 +12,6 @@ spring:
     user:
       name: username
       password: passw0rd
-
 
 management:
   endpoints:
