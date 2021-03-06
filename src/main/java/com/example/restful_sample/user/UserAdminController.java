@@ -91,7 +91,7 @@ public class UserAdminController {
     public ResponseEntity<User> createUser(@Valid @RequestBody User user) {
         User newUser = userDaoService.save(user);
 
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest()
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest() // 저장된 user의 id값을 uri로 변경 -> Header에 Location Key로 전달
                 .path("/{id}")
                 .buildAndExpand(newUser.getId())
                 .toUri();
