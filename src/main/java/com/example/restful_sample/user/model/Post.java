@@ -1,11 +1,14 @@
 package com.example.restful_sample.user.model;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import net.minidev.json.annotate.JsonIgnore;
 
 import javax.persistence.*;
+import javax.validation.constraints.Past;
+import java.util.Date;
 
 @Data
 @Entity
@@ -15,6 +18,8 @@ public class Post {
     @Id
     @GeneratedValue
     private Integer id;
+
+    private Date createDate;
 
     private String description;
 
