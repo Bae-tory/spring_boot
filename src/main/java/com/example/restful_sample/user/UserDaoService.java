@@ -1,6 +1,7 @@
 package com.example.restful_sample.user;
 
 
+import com.example.restful_sample.user.model.User;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

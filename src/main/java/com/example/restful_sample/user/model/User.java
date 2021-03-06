@@ -1,4 +1,4 @@
-package com.example.restful_sample.user;
+package com.example.restful_sample.user.model;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -9,9 +9,11 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -36,6 +38,8 @@ public class User {
     @ApiModelProperty(notes = "사용자의 비밀번호를 입력해 주세요.")
     private String ssn;
 
+    @OneToMany(mappedBy = "user") // user 테이블의 데이터와 매핑
+    private List<Post> posts;
 }
 
 /**

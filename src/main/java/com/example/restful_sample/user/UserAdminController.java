@@ -1,5 +1,6 @@
 package com.example.restful_sample.user;
 
+import com.example.restful_sample.user.model.User;
 import com.fasterxml.jackson.databind.ser.FilterProvider;
 import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
 import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;

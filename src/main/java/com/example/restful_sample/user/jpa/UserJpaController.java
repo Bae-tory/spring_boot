@@ -1,6 +1,6 @@
 package com.example.restful_sample.user.jpa;
 
-import com.example.restful_sample.user.User;
+import com.example.restful_sample.user.model.User;
 import com.example.restful_sample.user.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.EntityModel;

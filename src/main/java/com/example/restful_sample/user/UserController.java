@@ -1,5 +1,6 @@
 package com.example.restful_sample.user;
 
+import com.example.restful_sample.user.model.User;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.ResponseEntity;

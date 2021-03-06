@@ -1,6 +1,6 @@
 package com.example.restful_sample.user.jpa;
 
-import com.example.restful_sample.user.User;
+import com.example.restful_sample.user.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

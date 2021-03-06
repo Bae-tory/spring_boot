@@ -1,5 +1,6 @@
 package com.example.restful_sample.user;
 
+import com.example.restful_sample.user.model.User;
 import com.fasterxml.jackson.annotation.JsonFilter;
 import lombok.AllArgsConstructor;
 import lombok.Data;
