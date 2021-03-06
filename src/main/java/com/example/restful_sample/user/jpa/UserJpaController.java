@@ -1,13 +1,15 @@
 package com.example.restful_sample.user.jpa;
 
-import com.example.restful_sample.user.model.User;
 import com.example.restful_sample.user.UserNotFoundException;
+import com.example.restful_sample.user.model.Post;
+import com.example.restful_sample.user.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
@@ -68,5 +70,16 @@ public class UserJpaController {
                 .toUri();
 
         return ResponseEntity.created(location).build();
+    }
+
+    @GetMapping("/user/{id}/posts")
+    public List<Post> getAllPostByUser(@PathVariable int id) {
+        Optional<User> user = userRepository.findById(id);
+
+        if (!user.isPresent()) {
+            throw new UserNotFoundException(String.format("ID[%s] not found", id));
+        }
+
+        return user.get().getPosts();
     }
 }
