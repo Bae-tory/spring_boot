@@ -1,5 +1,6 @@
 package com.example.restful_sample.user.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,6 +27,7 @@ public class Post {
     // Parent(User) : Child(Post) -> 1 : N
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnore // 해당 데이터 json에서 숨기기
+    @JsonBackReference
     private User user;
 
 }

@@ -1,12 +1,16 @@
 package com.example.restful_sample.user.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 import java.util.Date;
@@ -36,6 +40,7 @@ public class User {
     private String ssn;
 
     @OneToMany(mappedBy = "user") // user 테이블의 데이터와 매핑
+    @JsonManagedReference
     private List<Post> posts;
 }
 
